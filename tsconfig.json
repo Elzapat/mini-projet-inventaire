@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "watch": true,
+        "outDir": "ts/build"
+    },
+    "files": [
+        "ts/ajax.ts",
+        "ts/requests.ts"
+    ]
+}
