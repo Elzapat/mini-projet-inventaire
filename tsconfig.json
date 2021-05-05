@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "esnext",
         "watch": true,
-        "outDir": "ts/build"
+        "outDir": "js"
     },
     "files": [
         "ts/ajax.ts",
