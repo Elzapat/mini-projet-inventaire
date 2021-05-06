@@ -2,15 +2,15 @@
 
 function send_response($data, $code) {
     $messages = array(
-        200 => "OK",
-        400 => "Bad Request",
-        500 => "Internal Server Error"
+        "200" => "OK",
+        "400" => "Bad Request",
+        "500" => "Internal Server Error"
     );
 
     header("Content-Type: application/json; charset=utf8");
     header("Cache-control: no-store, no-cache, must-revalidate");
     header("Pragma: no-cache");
-    header("HTTP1.1 $code " . $messages[$code]);
+    header("HTTP/1.1 $code " . $messages[$code]);
 
     // If the data isn't null, encode it to JSON and send it
     if ($data)
@@ -23,7 +23,7 @@ require_once("database.php");
 
 // If the request method isn't GET, the request isn't correct
 if ($_SERVER["REQUEST_METHOD"] != "GET")
-    send_response(null, 400);
+    send_response(null, "400");
 
 try {
     $db = new dbConnector();
@@ -31,7 +31,7 @@ try {
     // If there was a problem accessing the database
     // we send an error to the client
     error_log("Request error" . $exception->getMessage());
-    send_response(null, 500);
+    send_response(null, "500");
 }
 
 $request = substr($_SERVER["PATH_INFO"], 1);
@@ -43,7 +43,7 @@ $requestRessource = array_shift($request);
 $parameter = array_shift($request);
 
 if (!$ressource || !$APIVersion || !$requestRessource)
-    send_response(null, 400);
+    send_response(null, "400");
 
 switch ($requestRessource) {
     case "employees":
@@ -59,8 +59,8 @@ switch ($requestRessource) {
 }
 
 if ($data)
-    send_response($data, 200);
+    send_response($data, "200");
 else
-    send_response(null, 400);
+    send_response(null, "400");
 
 ?>
