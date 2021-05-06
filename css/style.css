@@ -1,14 +1,33 @@
 body{
-    margin-top: 100px;
-    font-family: 'Trebuchet MS', serif;
-    line-height: 1.6
+    margin-top: 5vh;
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.6;
+    background-color: rgb(190, 233, 212);
 }
 .container{
-    width: 800px;
+
+    width: 90vw;
     margin: 0 auto;
 }
 
+label{
+    display: flex;
+    padding: 10px 10px;
+    background: #cecece;
+}
+label input{
+    flex: 1;
+    margin: 0px 5px;
+    background: none;
+    border: none;
+}
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 
 ul.tabs{
     margin: 0px;
@@ -16,7 +35,7 @@ ul.tabs{
     list-style: none;
 }
 ul.tabs li{
-    background: none;
+    background: #cecece;
     color: #222;
     display: inline-block;
     padding: 10px 15px;
@@ -36,4 +55,104 @@ ul.tabs li.current{
 
 .tab-content.current{
     display: inherit;
+    height: 75vh;
+}
+
+
+table {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    table-layout: fixed;
+    overflow-x:auto;
+}
+  
+.tab-content{
+    overflow-x:auto;
+    margin-top: 0px;
+}
+
+  
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    /*padding: 10px;*/
+}
+  
+table th,
+table td {
+    padding:5px;
+    text-align: center;
+}
+  
+table th {
+    /*font-size: .85em;*/
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+  
+@media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #4CAF50;
+}
+  
+.button:hover {
+    background-color: white;
+    color: black;
 }

@@ -6,6 +6,7 @@
     },
     "files": [
         "ts/ajax.ts",
-        "ts/requests.ts"
+        "ts/requests.ts",
+        "ts/style.ts"
     ]
 }
