@@ -1,7 +1,6 @@
 function ajaxRequest(type, url, callback, data = null) {
-    let xhr;
     // Create XML HTTP request.
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     if (type == 'GET' && data != null)
         url += '?' + data;
     xhr.open(type, url);

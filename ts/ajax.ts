@@ -1,8 +1,8 @@
-function ajaxRequest(type, url, callback, data = null) {
-    let xhr;
+function ajaxRequest(type: string, url: string,
+    callback: (data: Object) => void, data: string = null): void {
 
     // Create XML HTTP request.
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     if (type == 'GET' && data != null)
         url += '?' + data;
     xhr.open(type, url);
@@ -27,8 +27,7 @@ function ajaxRequest(type, url, callback, data = null) {
 }
 
 function httpErrors(errorCode) {
-    let messages =
-    {
+    let messages = {
         400: 'Requête incorrecte',
         401: 'Authentifiez vous',
         403: 'Accès refusé',

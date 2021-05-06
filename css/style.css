@@ -48,14 +48,12 @@ ul.tabs li.current{
 }
 
 .tab-content{
-    display: none;
-    background: #ededed;
-    padding: 15px;
-}
-
-.tab-content.current{
     display: inherit;
     height: 75vh;
+    background: #ededed;
+    padding: 15px;
+    overflow-x:auto;
+    margin-top: 0px;
 }
 
 
@@ -67,12 +65,6 @@ table {
     table-layout: fixed;
     overflow-x:auto;
 }
-  
-.tab-content{
-    overflow-x:auto;
-    margin-top: 0px;
-}
-
   
 table tr {
     background-color: #f8f8f8;
