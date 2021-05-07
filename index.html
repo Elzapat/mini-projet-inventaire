@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style -->
+    <link rel="icon" href="/css/search-solid.svg" />
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
         integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="js/ajax.js" defer></script>
@@ -16,14 +21,31 @@
 </head>
 
 <body>
+    <div class="overlay">
+        <div class="popup">
+            <div class="popup-header">
+                <i id="popup-back" class="fa fa-chevron-left"></i>
+                <h2 id="popup-title">title</h2>
+                <i id="popup-close" class="fa fa-times"></i>
+            </div>
+            <div id="popup-content">
+                <div class="popup-element" data-label="test">test</div>
+                <div class="popup-element" data-label="test">test</div>
+                <div class="popup-element" data-label="test">test</div>
+                <div class="popup-element" data-label="test">test</div>
+                <div class="popup-element" data-label="test">test</div>
+                <div class="popup-element" data-label="test"><button class="button">plus d'information</button></div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">utilisateur</li>
             <li class="tab-link" data-tab="tab-2">équipement</li>
         </ul>
         <div id="tab-1" class="tab-content">
-            <label><i class="fa fa-search" style="font-size: 19px;
-                color: #25c481;"></i><input type="text" id="search" placeholder="Search.."></label>
+            <label><i class="fa fa-search" id="tab-loop"></i><input type="text" id="search"
+                    placeholder="Search.."></label>
             <table>
                 <thead id="table-head"></thead>
 

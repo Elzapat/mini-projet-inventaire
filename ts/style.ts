@@ -16,3 +16,19 @@ $("#search").on("keyup", (event) => {
         return false;
     });
 });
+
+$('#popup-close').on("click", () => {
+    $(".overlay").hide()
+})
+
+$('#table-body').on("click", ".button", (event) => {
+    let [type, value] = $(event.target).closest('.button').data("ref").split(':');;
+
+    if (type == "email") {
+        $(".overlay").css('display', 'flex');
+        popupEmployee("php/requests.php/api/V1/employees/" + value);
+    } else if (type == "serial") {
+        $(".overlay").css('display', 'flex');
+        popupEquipement("php/requests.php/api/V1/equipments/" + value);
+    }
+})

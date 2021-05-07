@@ -1,3 +1,4 @@
+/* style de la page */
 body{
     margin-top: 5vh;
     font-family: "Open Sans", sans-serif;
@@ -5,12 +6,13 @@ body{
     background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #25c481, #25b7c4);
 }
+/* conteneur principal*/
 .container{
-
     width: 90vw;
     margin: 0 auto;
 }
 
+/*système de tabulations*/
 ul.tabs{
     padding-left: 10px;
     width: calc(90vw - 10px);
@@ -41,7 +43,7 @@ ul.tabs li.current{
     overflow-x:auto;
     margin-top: 0px;
 }
-
+/* barre de recherche */
 label{
     display: flex;
     border-radius: 5px;
@@ -57,6 +59,11 @@ label input{
     border: none;
 }
 
+#tab-loop{
+    font-size: 19px;
+    color: #25c481;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -64,6 +71,7 @@ button:focus {
     outline: none;
 }
 
+/*style du tableau principal*/
 table {
     margin-top: 15px;
     border: 1px solid #ccc;
@@ -78,20 +86,16 @@ table thead tr {
     color: white;
 }
 
-fa fa-search{
-    font-size: 19px;
-    color: #25c481;
-}
-
 table tr {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
+   
     /*padding: 10px;*/
 }
   
 table th,
 table td {
-    padding:4px;
+    padding: 8px;
     text-align: center;
 }
   
@@ -100,7 +104,8 @@ table th {
     letter-spacing: .1em;
     text-transform: uppercase;
 }
-  
+
+/* permet d'avoir une meilleure responsivité sur le tableau */
 @media screen and (max-width: 600px) {
     table {
       border: 0;
@@ -146,6 +151,9 @@ table th {
     }
 }
 
+/* 
+ * style du bouton
+ */
 .button {
     background: #25c481; /* Green */
     border: none;
@@ -154,8 +162,7 @@ table th {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: medium;
     transition-duration: 0.4s;
     cursor: pointer;
     
@@ -163,4 +170,81 @@ table th {
   
 .button:hover {
     background: #25b7c4;
+}
+
+/* Popup */
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+.popup {
+    background-color: #fefefe;
+    width: 40vw; /* Could be more or less, depending on screen size */
+}
+
+.popup-header {
+    align-items: center;
+    display: flex;
+    height: 45px;
+    background-color: lightgray;
+}
+
+.popup-header h2{
+    flex: 1;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-size:large;
+    font-weight: 500;
+    font-family: "Open Sans", sans-serif;
+}
+
+#popup-back, #popup-close{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25c481;
+    color: white;
+    width: 40px;
+    height: 40px;
+    margin: 2.5px;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+}
+
+#popup-back:hover, #popup-close:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background: #25b7c4;
+}
+
+#popup-content {
+    margin: 15px;
+    border: 1px solid #ddd;
+}
+.popup-element {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: medium;
+    text-align: right;
+}
+  
+.popup-element::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
 }
