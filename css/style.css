@@ -194,6 +194,13 @@ table th {
     width: 40vw; /* Could be more or less, depending on screen size */
 }
 
+@media screen and (max-width: 600px) {
+    .popup {
+        background-color: #fefefe;
+        width: 80vw; /* Could be more or less, depending on screen size */
+    }
+}
+
 .popup-header {
     align-items: center;
     display: flex;
@@ -212,6 +219,7 @@ table th {
 }
 
 #popup-back, #popup-close{
+    font-size: large;
     display: flex;
     align-items: center;
     justify-content: center;
