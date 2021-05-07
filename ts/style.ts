@@ -35,7 +35,7 @@ $('#table-body').on("click", ".button", (event) => {
 
 /*nononon sry mogooo*/
 interface JQuery {
-    drags(): JQuery;
+    drags(): any;
 }
 
 $.fn.drags = function (opt) {
@@ -79,6 +79,3 @@ $.fn.drags = function (opt) {
 }
 
 $('.popup').drags();
-
-
-
