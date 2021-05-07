@@ -23,18 +23,18 @@ function employees() {
     })
 }
 
-interface Equipments {
+interface Equipment {
     name: string;
 }
 
-function equipement() {
-    ajaxRequest("GET", "php/requests.php/api/V1/equipments", (data: Equipments[]) => {
+function equipements() {
+    ajaxRequest("GET", "php/requests.php/api/V1/equipments", (data: Equipment[]) => {
         $('#table-head').html(`<tr>
         <th scope="col">Nom</th>
         <th scope="col">En Savoir plus</th>
         </tr>`);
         $('#table-body').html("");
-        data.forEach((element: Equipments) => {
+        data.forEach((element: Equipment) => {
             $('#table-body').append(`<tr>
             <td data-label="Nom">${element.name}</td>
             <td data-label="En Savoir plus"><button class="button">Button Chan</button></td>

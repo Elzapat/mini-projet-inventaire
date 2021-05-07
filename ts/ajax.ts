@@ -26,7 +26,7 @@ function ajaxRequest(type: string, url: string,
     xhr.send(data);
 }
 
-function httpErrors(errorCode) {
+function httpErrors(errorCode: number) {
     let messages = {
         400: 'Requête incorrecte',
         401: 'Authentifiez vous',
@@ -39,7 +39,8 @@ function httpErrors(errorCode) {
     // Display error.
     if (errorCode in messages) {
         let errors = document.getElementById("errors");
-        errors.innerHTML = "'<strong>' + messages[errorCode] + '</strong>'";
+        errors.innerHTML = "'<strong>'" + errorCode.toString()  + messages[errorCode] + "'</strong>'";
+        errors.innerHTML = `<strong> ${errorCode.toString()}: ${messages[errorCode]}`;
         errors.style.display = "block";
         setTimeout(() => {
             errors.style.display = "none";

@@ -16,7 +16,7 @@ function employees() {
         });
     });
 }
-function equipement() {
+function equipements() {
     ajaxRequest("GET", "php/requests.php/api/V1/equipments", (data) => {
         $('#table-head').html(`<tr>
         <th scope="col">Nom</th>

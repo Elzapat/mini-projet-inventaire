@@ -1,17 +1,18 @@
-$('ul.tabs li').click(function () {
-    var tab_id = $(this).attr('data-tab');
+$('ul.tabs li').on("click", (event) => {
+    let tab_id = $(event.currentTarget).attr('data-tab');
     if (tab_id == "tab-1") {
         employees();
     } else {
-        equipement();
+        equipements();
     }
     $('ul.tabs li').removeClass('current');
-    $(this).addClass('current');
+    $(event.currentTarget).addClass('current');
 })
 
-$("#search").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
-    $("#table-body tr").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+$("#search").on("keyup", (event) => {
+    let value: string = ($(event.currentTarget).val() as string).toLowerCase();
+    $("#table-body tr").filter((_index, element) => {
+        $(element).toggle($(element).text().toLowerCase().indexOf(value) > -1);
+        return false;
     });
 });
