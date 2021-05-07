@@ -42,8 +42,10 @@ $APIVersion = array_shift($request);
 $requestRessource = array_shift($request);
 $parameter = array_shift($request);
 
-if (!$ressource || !$APIVersion || !$requestRessource)
+if ($ressource != "api" || $APIVersion != "V1" || !$requestRessource)
     send_response(null, 400);
+
+$data = null;
 
 switch ($requestRessource) {
     case "employees":
@@ -58,6 +60,8 @@ switch ($requestRessource) {
         else
             $data = $db->getEquipments();
         break;
+    default:
+        send_reponse(null, 400);
 }
 
 if ($data)

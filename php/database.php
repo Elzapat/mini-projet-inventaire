@@ -18,7 +18,7 @@ class dbConnector {
 
     // Get all of the employees
     public function getEmployees() {
-        $request = "SELECT last_name, first_name FROM employee;";
+        $request = "SELECT last_name, first_name, email FROM employee;";
         $statement = $this->db->prepare($request);
         $statement->execute();
 
@@ -34,12 +34,12 @@ class dbConnector {
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return $result[0];
     }
 
     // Get all of the equipments
     public function getEquipments() {
-        $request = "SELECT name FROM equipment;";
+        $request = "SELECT name, serial_number FROM assignment;";
         $statement = $this->db->prepare($request);
         $statement->execute();
 
@@ -49,13 +49,15 @@ class dbConnector {
 
     // Get one equipment by its serial number
     public function getEquipment($serialNumber) {
-        $request = "SELECT * FROM equipment WHERE serial_number = :serial_number;";
+        $request = "SELECT a.serial_number, a.assignment_date, a.email, e.name, e.feature, e.manufacturing_date
+                    FROM equipment e JOIN assignment a ON e.name = a.name
+                    WHERE a.serial_number = :serial_number;";
         $statement = $this->db->prepare($request);
         $statement->bindParam(":serial_number", $serialNumber, PDO::PARAM_STR, 50);
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return $result[0];
     }
 }
 
