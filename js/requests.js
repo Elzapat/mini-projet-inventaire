@@ -11,7 +11,7 @@ function employees() {
             $('#table-body').append(`<tr>
             <td data-label="Nom">${element.last_name}</td>
             <td data-label="Prenom">${element.first_name}</td>
-            <td data-label="En Savoir plus"><button class="button">Button Chan</button></td>
+            <td data-label="En Savoir plus"><button class="button">plus d'information</button></td>
         </tr>`);
         });
     });
@@ -26,7 +26,7 @@ function equipements() {
         data.forEach((element) => {
             $('#table-body').append(`<tr>
             <td data-label="Nom">${element.name}</td>
-            <td data-label="En Savoir plus"><button class="button">Button Chan</button></td>
+            <td data-label="En Savoir plus"><button class="button">plus d'information</button></td>
         </tr>`);
         });
     });

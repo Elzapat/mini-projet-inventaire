@@ -2,7 +2,8 @@ body{
     margin-top: 5vh;
     font-family: "Open Sans", sans-serif;
     line-height: 1.6;
-    background-color: rgb(190, 233, 212);
+    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #25c481, #25b7c4);
 }
 .container{
 
@@ -10,31 +11,16 @@ body{
     margin: 0 auto;
 }
 
-label{
-    display: flex;
-    padding: 10px 10px;
-    background: #cecece;
-}
-label input{
-    flex: 1;
-    margin: 0px 5px;
-    background: none;
-    border: none;
-}
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-
 ul.tabs{
+    padding-left: 10px;
+    width: calc(90vw - 10px);
+    background: #cecece;
     margin: 0px;
-    padding: 0px;
     list-style: none;
+    display: flex;
 }
 ul.tabs li{
+    border-radius: 5px 5px 0px 0px; 
     background: #cecece;
     color: #222;
     display: inline-block;
@@ -56,16 +42,47 @@ ul.tabs li.current{
     margin-top: 0px;
 }
 
+label{
+    display: flex;
+    border-radius: 5px;
+    padding: 12px 10px;
+    background: #cecece;
+}
+label input{
+    font-family: "Open Sans", sans-serif;
+    font-size: medium;
+    flex: 1;
+    margin: 0px 5px;
+    background: none;
+    border: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 
 table {
-    margin-top: 20px;
+    margin-top: 15px;
     border: 1px solid #ccc;
     border-collapse: collapse;
     width:100%;
     table-layout: fixed;
     overflow-x:auto;
 }
-  
+table thead tr {
+    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #25c481, #25b7c4);
+    color: white;
+}
+
+fa fa-search{
+    font-size: 19px;
+    color: #25c481;
+}
+
 table tr {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
@@ -74,12 +91,12 @@ table tr {
   
 table th,
 table td {
-    padding:5px;
+    padding:4px;
     text-align: center;
 }
   
 table th {
-    /*font-size: .85em;*/
+    padding:10px;
     letter-spacing: .1em;
     text-transform: uppercase;
 }
@@ -130,7 +147,7 @@ table th {
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background: #25c481; /* Green */
     border: none;
     color: white;
     padding: 5px 16px;
@@ -141,10 +158,9 @@ table th {
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
-    border: 2px solid #4CAF50;
+    
 }
   
 .button:hover {
-    background-color: white;
-    color: black;
+    background: #25b7c4;
 }
