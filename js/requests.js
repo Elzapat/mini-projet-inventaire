@@ -1,3 +1,4 @@
+//Initialistaion du tableau
 employees();
 //affiche tous les employés sur la page principale
 function employees() {
@@ -43,6 +44,7 @@ function equipements() {
         });
     });
 }
+//Permet d'afficher un employé dans la popup
 function popupEmployee(link) {
     ajaxRequest("GET", link, (data) => {
         $('#popup-title').html(`${data.first_name} ${data.last_name}`);
@@ -57,6 +59,7 @@ function popupEmployee(link) {
             </div>`);
     });
 }
+//Permet d'afficher un équiment dans la popup
 function popupEquipement(link) {
     ajaxRequest("GET", link, (data) => {
         $('#popup-title').html(`${data.name}`);
@@ -68,6 +71,7 @@ function popupEquipement(link) {
             `);
     });
 }
+//permet d'afficher les équipement associés à un employé dans la popup
 function popupLinkedEquipement(link, email) {
     $("#popup-back").css('visibility', 'visible');
     $("#popup-back").data("ref", `email:${email}`);

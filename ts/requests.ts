@@ -1,6 +1,7 @@
+//Initialistaion du tableau
 employees();
 
-//type de employee
+//type de employee dans le tableau
 interface Employee {
     last_name: string;
     first_name: string;
@@ -30,7 +31,7 @@ function employees() {
     })
 }
 
-//type d'un equipement
+//type d'un equipement dans le tableau
 interface Equipment {
     name: string;
     serial_number: string;
@@ -58,6 +59,8 @@ function equipements() {
         });
     })
 }
+
+//type d'un employé dans la popup
 interface FullEmployee {
     last_name: string;
     first_name: string;
@@ -65,6 +68,7 @@ interface FullEmployee {
     hiring_date: string;
 }
 
+//Permet d'afficher un employé dans la popup
 function popupEmployee(link: string) {
     ajaxRequest("GET", link, (data: FullEmployee) => {
         $('#popup-title').html(`${data.first_name} ${data.last_name}`);
@@ -82,6 +86,7 @@ function popupEmployee(link: string) {
     })
 }
 
+//type d'un équiment dans la popup
 interface FullEquipment {
     serial_number: string;
     assignment_date: string;
@@ -90,6 +95,7 @@ interface FullEquipment {
     manufacturing_date: string;
 }
 
+//Permet d'afficher un équiment dans la popup
 function popupEquipement(link: string) {
     ajaxRequest("GET", link, (data: FullEquipment) => {
         $('#popup-title').html(`${data.name}`);
@@ -103,7 +109,7 @@ function popupEquipement(link: string) {
     })
 }
 
-
+//permet d'afficher les équipement associés à un employé dans la popup
 function popupLinkedEquipement(link: string, email: string) {
     $("#popup-back").css('visibility', 'visible');
     $("#popup-back").data("ref", `email:${email}`);

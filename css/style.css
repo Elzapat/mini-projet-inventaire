@@ -1,4 +1,6 @@
-/* style de la page */
+/* 
+ * Style de la page 
+ */
 body{
     margin-top: 5vh;
     font-family: "Open Sans", sans-serif;
@@ -6,13 +8,17 @@ body{
     background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #25c481, #25b7c4);
 }
-/* conteneur principal*/
+/* 
+ * Conteneur principal
+ */
 .container{
     width: 90vw;
     margin: 0 auto;
 }
 
-/*système de tabulations*/
+/*
+ * Système de tabulations
+ */
 ul.tabs{
     padding-left: 10px;
     width: calc(90vw - 10px);
@@ -43,13 +49,17 @@ ul.tabs li.current{
     overflow-x:auto;
     margin-top: 0px;
 }
-/* barre de recherche */
+
+/* 
+ * Barre de recherche 
+ */
 label{
     display: flex;
     border-radius: 5px;
     padding: 12px 10px;
     background: #cecece;
 }
+
 label input{
     font-family: "Open Sans", sans-serif;
     font-size: medium;
@@ -71,7 +81,9 @@ button:focus {
     outline: none;
 }
 
-/*style du tableau principal*/
+/*
+ * Style du tableau principal
+ */
 table {
     margin-top: 15px;
     border: 1px solid #ccc;
@@ -136,10 +148,6 @@ table th {
     }
     
     table td::before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
       content: attr(data-label);
       float: left;
       font-weight: bold;
@@ -172,7 +180,9 @@ table th {
     background: #25b7c4;
 }
 
-/* Popup */
+/* 
+ * Popup 
+ */
 .overlay {
     display: flex;
     align-items: center;

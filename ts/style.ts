@@ -1,3 +1,4 @@
+//Système de tabulation qui permet d'afficher les employees ou les équiments selon la tab
 $('ul.tabs li').on("click", (event) => {
     let tab_id = $(event.currentTarget).attr('data-tab');
     if (tab_id == "tab-1") {
@@ -9,6 +10,7 @@ $('ul.tabs li').on("click", (event) => {
     $(event.currentTarget).addClass('current');
 })
 
+//Barre de recherche avec jquery
 $("#search").on("keyup", (event) => {
     let value: string = ($(event.currentTarget).val() as string).toLowerCase();
     $("#table-body tr").filter((_index, element) => {
@@ -17,11 +19,14 @@ $("#search").on("keyup", (event) => {
     });
 });
 
+//Permet de fermer la popup en clickant sur le bouton x
 $('#popup-close').on("click", () => {
     $(".overlay").hide();
     $("#popup-back").css('visibility', 'hidden');
 })
 
+//Permet d'afficher la popup correspondante au bonton sur lequel on a cliqué
+//Marche grâce à un data tag en html (ici data-ref)
 $('body').on("click", ".button", (event) => {
     $("#popup-back").css('visibility', 'hidden');
     let [type, value] = $(event.target).closest('.button').data("ref").split(':');;
@@ -38,7 +43,7 @@ $('body').on("click", ".button", (event) => {
     }
 })
 
-/*nononon sry mogooo*/
+//possiblité de faire bouger les fenetres
 /*
 interface JQuery {
     drags(): any;
