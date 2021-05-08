@@ -34,7 +34,7 @@ $('body').on("click", ".button", (event) => {
     }
     else if (type == "inventory") {
         $(".overlay").css('display', 'flex');
-        popupLinkedEquipement("http://phproject/php/requests.php/api/v1/employees/" + value + "/equipments", value);
+        popupLinkedEquipement("php/requests.php/api/v1/employees/" + value + "/equipments", value);
     }
 });
 /*nononon sry mogooo*/
