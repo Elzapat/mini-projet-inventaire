@@ -9,7 +9,7 @@ interface Employee {
 
 //affiche tous les employés sur la page principale
 function employees() {
-    ajaxRequest("GET", "php/requests.php/api/V1/employees", (data: Employee[]) => {
+    ajaxRequest("GET", "php/requests.php/api/v1/employees", (data: Employee[]) => {
         $('#table-head').html(`<tr>
         <th scope="col">Nom</th>
         <th scope="col">Prenom</th>
@@ -38,7 +38,7 @@ interface Equipment {
 
 //affiche tout les equipement sur la page principale
 function equipements() {
-    ajaxRequest("GET", "php/requests.php/api/V1/equipments", (data: Equipment[]) => {
+    ajaxRequest("GET", "php/requests.php/api/v1/equipments", (data: Equipment[]) => {
         $('#table-head').html(`<tr>
         <th scope="col">Numéro de série</th>
         <th scope="col">Nom</th>
@@ -65,7 +65,7 @@ interface FullEmployee {
     hiring_date: string;
 }
 
-function popupEmployee(link) {
+function popupEmployee(link: string) {
     ajaxRequest("GET", link, (data: FullEmployee) => {
         $('#popup-title').html(`${data.first_name} ${data.last_name}`);
         $('#popup-content').html(
@@ -90,7 +90,7 @@ interface FullEquipment {
     manufacturing_date: string;
 }
 
-function popupEquipement(link) {
+function popupEquipement(link: string) {
     ajaxRequest("GET", link, (data: FullEquipment) => {
         $('#popup-title').html(`${data.name}`);
         $('#popup-content').html(

@@ -13,7 +13,7 @@ function send_response($data, $code) {
     header("HTTP/1.1 $code " . $messages[$code]);
 
     // If the data isn't null, encode it to JSON and send it
-    if ($data)
+    if (isset($data))
         echo json_encode($data);
 
     exit;
@@ -38,25 +38,28 @@ $request = substr($_SERVER["PATH_INFO"], 1);
 $request = explode("/", $request);
 
 $ressource = array_shift($request);
-$APIVersion = array_shift($request);
+$apiVersion = array_shift($request);
 $requestRessource = array_shift($request);
-$parameter = array_shift($request);
 
-if ($ressource != "api" || $APIVersion != "V1" || !$requestRessource)
+// If the ressource is not api, the version is not v1
+// or the request ressource isn't set, send a Bad Request header
+if ($ressource != "api" || $apiVersion != "v1" || !isset($requestRessource))
     send_response(null, 400);
 
 $data = null;
 
 switch ($requestRessource) {
     case "employees":
-        if ($parameter)
-            $data = $db->getEmployee($parameter);
+        if (isset($request[0]) && isset($request[1]) && $request[1] == "equipments")
+            $data = $db->getEmployeeEquipments($request[0]);
+        else if (isset($request[0]))
+            $data = $db->getEmployee($request[0]);
         else
             $data = $db->getEmployees();
         break;
     case "equipments":
-        if ($parameter)
-            $data = $db->getEquipment($parameter);
+        if (isset($request[0]))
+            $data = $db->getEquipment($request[0]);
         else
             $data = $db->getEquipments();
         break;
@@ -64,9 +67,7 @@ switch ($requestRessource) {
         send_reponse(null, 400);
 }
 
-if ($data)
-    send_response($data, 200);
-else
-    send_response(null, 400);
+$code = isset($data) ? 200 : 400;
+send_response($data, $code);
 
 ?>

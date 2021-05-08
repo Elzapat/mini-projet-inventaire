@@ -26,10 +26,10 @@ $('#table-body').on("click", ".button", (event) => {
 
     if (type == "email") {
         $(".overlay").css('display', 'flex');
-        popupEmployee("php/requests.php/api/V1/employees/" + value);
+        popupEmployee("php/requests.php/api/v1/employees/" + value);
     } else if (type == "serial") {
         $(".overlay").css('display', 'flex');
-        popupEquipement("php/requests.php/api/V1/equipments/" + value);
+        popupEquipement("php/requests.php/api/v1/equipments/" + value);
     }
 })
 

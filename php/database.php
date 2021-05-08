@@ -49,7 +49,7 @@ class dbConnector {
 
     // Get one equipment by its serial number
     public function getEquipment($serialNumber) {
-        $request = "SELECT a.serial_number, a.assignment_date, a.email, e.name, e.feature, e.manufacturing_date
+        $request = "SELECT a.serial_number, a.assignment_date, e.name, e.feature, e.manufacturing_date
                     FROM equipment e JOIN assignment a ON e.name = a.name
                     WHERE a.serial_number = :serial_number;";
         $statement = $this->db->prepare($request);
@@ -58,6 +58,19 @@ class dbConnector {
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result[0];
+    }
+
+    // Get all the equipments assigned to one employee, identified by its email
+    public function getEmployeeEquipments($email) {
+        $request = "SELECT a.serial_number, a.assignment_date, e.name, e.feature, e.manufacturing_date
+                    FROM equipment e JOIN assignment a ON e.name = a.name
+                    WHERE a.email = :email";
+        $statement = $this->db->prepare($request);
+        $statement->bindParam(":email", $email, PDO::PARAM_STR, 30);
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
 
