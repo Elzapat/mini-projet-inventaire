@@ -1,7 +1,7 @@
 employees();
 //affiche tous les employés sur la page principale
 function employees() {
-    ajaxRequest("GET", "php/requests.php/api/V1/employees", (data) => {
+    ajaxRequest("GET", "php/requests.php/api/v1/employees", (data) => {
         $('#table-head').html(`<tr>
         <th scope="col">Nom</th>
         <th scope="col">Prenom</th>
@@ -23,7 +23,7 @@ function employees() {
 }
 //affiche tout les equipement sur la page principale
 function equipements() {
-    ajaxRequest("GET", "php/requests.php/api/V1/equipments", (data) => {
+    ajaxRequest("GET", "php/requests.php/api/v1/equipments", (data) => {
         $('#table-head').html(`<tr>
         <th scope="col">Numéro de série</th>
         <th scope="col">Nom</th>
@@ -51,7 +51,7 @@ function popupEmployee(link) {
             <div class="popup-element" data-label="Email">${data.email}</div>
             <div class="popup-element" data-label="Date d'embauche">${data.hiring_date}</div>
             <div class="popup-element" data-label="matériel associé">
-                <button data-ref="serial:${data.email}" class="button">
+                <button data-ref="inventory:${data.email}" class="button">
                     voir
                 </button>
             </div>`);
@@ -66,5 +66,16 @@ function popupEquipement(link) {
             <div class="popup-element" data-label="Date d'assignement">${data.assignment_date}</div>
             <div class="popup-element" data-label="Date de sortie d'usine">${data.manufacturing_date}</div>
             `);
+    });
+}
+function popupLinkedEquipement(link, email) {
+    $("#popup-back").css('visibility', 'visible');
+    $("#popup-back").data("ref", `email:${email}`);
+    ajaxRequest("GET", link, (data) => {
+        $('#popup-title').html(`${email}`);
+        $('#popup-content').html("");
+        data.forEach((element) => {
+            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.name}</div>`);
+        });
     });
 }

@@ -18,10 +18,12 @@ $("#search").on("keyup", (event) => {
 });
 
 $('#popup-close').on("click", () => {
-    $(".overlay").hide()
+    $(".overlay").hide();
+    $("#popup-back").css('visibility', 'hidden');
 })
 
-$('#table-body').on("click", ".button", (event) => {
+$('body').on("click", ".button", (event) => {
+    $("#popup-back").css('visibility', 'hidden');
     let [type, value] = $(event.target).closest('.button').data("ref").split(':');;
 
     if (type == "email") {
@@ -30,10 +32,14 @@ $('#table-body').on("click", ".button", (event) => {
     } else if (type == "serial") {
         $(".overlay").css('display', 'flex');
         popupEquipement("php/requests.php/api/v1/equipments/" + value);
+    } else if (type == "inventory") {
+        $(".overlay").css('display', 'flex');
+        popupLinkedEquipement("http://phproject/php/requests.php/api/v1/employees/" + value + "/equipments", value);
     }
 })
 
 /*nononon sry mogooo*/
+/*
 interface JQuery {
     drags(): any;
 }
@@ -78,4 +84,4 @@ $.fn.drags = function (opt) {
 
 }
 
-$('.popup').drags();
+$('.popup').drags();*/

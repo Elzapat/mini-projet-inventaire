@@ -230,6 +230,8 @@ table th {
     margin: 2.5px;
     border-radius: 5px;
     transition-duration: 0.4s;
+    padding: 0;
+    transition-duration: 0s;
 }
 
 #popup-back:hover, #popup-close:hover {

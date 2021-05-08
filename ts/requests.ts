@@ -74,7 +74,7 @@ function popupEmployee(link: string) {
             <div class="popup-element" data-label="Email">${data.email}</div>
             <div class="popup-element" data-label="Date d'embauche">${data.hiring_date}</div>
             <div class="popup-element" data-label="matériel associé">
-                <button data-ref="serial:${data.email}" class="button">
+                <button data-ref="inventory:${data.email}" class="button">
                     voir
                 </button>
             </div>`);
@@ -103,3 +103,15 @@ function popupEquipement(link: string) {
     })
 }
 
+
+function popupLinkedEquipement(link: string, email: string) {
+    $("#popup-back").css('visibility', 'visible');
+    $("#popup-back").data("ref", `email:${email}`);
+    ajaxRequest("GET", link, (data: FullEquipment[]) => {
+        $('#popup-title').html(`${email}`);
+        $('#popup-content').html("");
+        data.forEach((element: FullEquipment) => {
+            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.name}</div>`);
+        });
+    })
+}

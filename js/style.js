@@ -18,35 +18,52 @@ $("#search").on("keyup", (event) => {
 });
 $('#popup-close').on("click", () => {
     $(".overlay").hide();
+    $("#popup-back").css('visibility', 'hidden');
 });
-$('#table-body').on("click", ".button", (event) => {
+$('body').on("click", ".button", (event) => {
+    $("#popup-back").css('visibility', 'hidden');
     let [type, value] = $(event.target).closest('.button').data("ref").split(':');
     ;
     if (type == "email") {
         $(".overlay").css('display', 'flex');
-        popupEmployee("php/requests.php/api/V1/employees/" + value);
+        popupEmployee("php/requests.php/api/v1/employees/" + value);
     }
     else if (type == "serial") {
         $(".overlay").css('display', 'flex');
-        popupEquipement("php/requests.php/api/V1/equipments/" + value);
+        popupEquipement("php/requests.php/api/v1/equipments/" + value);
+    }
+    else if (type == "inventory") {
+        $(".overlay").css('display', 'flex');
+        popupLinkedEquipement("http://phproject/php/requests.php/api/v1/employees/" + value + "/equipments", value);
     }
 });
+/*nononon sry mogooo*/
+/*
+interface JQuery {
+    drags(): any;
+}
+
 $.fn.drags = function (opt) {
+
     opt = $.extend({ handle: "", cursor: "move" }, opt);
+
     if (opt.handle === "") {
         var $el = this;
-    }
-    else {
+    } else {
         var $el = this.find(opt.handle);
     }
+
     return $el.css('cursor', opt.cursor).on("mousedown", function (e) {
         if (opt.handle === "") {
             var $drag = $(this).addClass('draggable');
-        }
-        else {
+        } else {
             var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
         }
-        var z_idx = $drag.css('z-index'), drg_h = $drag.outerHeight(), drg_w = $drag.outerWidth(), pos_y = $drag.offset().top + drg_h - e.pageY, pos_x = $drag.offset().left + drg_w - e.pageX;
+        var z_idx = $drag.css('z-index'),
+            drg_h = $drag.outerHeight(),
+            drg_w = $drag.outerWidth(),
+            pos_y = $drag.offset().top + drg_h - e.pageY,
+            pos_x = $drag.offset().left + drg_w - e.pageX;
         $drag.css('z-index', 1000).parents().on("mousemove", function (e) {
             $('.draggable').offset({
                 top: e.pageY + pos_y - drg_h,
@@ -59,10 +76,11 @@ $.fn.drags = function (opt) {
     }).on("mouseup", function () {
         if (opt.handle === "") {
             $(this).removeClass('draggable');
-        }
-        else {
+        } else {
             $(this).removeClass('active-handle').parent().removeClass('draggable');
         }
     });
-};
-$('.popup').drags();
+
+}
+
+$('.popup').drags();*/
