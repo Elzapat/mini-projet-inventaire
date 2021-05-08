@@ -73,7 +73,7 @@ function popupEmployee(link: string) {
             <div class="popup-element" data-label="Prenom">${data.first_name}</div>
             <div class="popup-element" data-label="Email">${data.email}</div>
             <div class="popup-element" data-label="Date d'embauche">${data.hiring_date}</div>
-            <div class="popup-element" data-label="matériel associé">
+            <div class="popup-element" data-label="Matériels associés">
                 <button data-ref="inventory:${data.email}" class="button">
                     voir
                 </button>
@@ -97,8 +97,8 @@ function popupEquipement(link: string) {
             `<div class="popup-element" data-label="Nom">${data.name}</div>
             <div class="popup-element" data-label="Caracteristique">${data.feature}</div>
             <div class="popup-element" data-label="Numéro de Série">${data.serial_number}</div>
-            <div class="popup-element" data-label="Date d'assignement">${data.assignment_date}</div>
-            <div class="popup-element" data-label="Date de sortie d'usine">${data.manufacturing_date}</div>
+            <div class="popup-element" data-label="Date d'affectation">${data.assignment_date}</div>
+            <div class="popup-element" data-label="Date de fabrication">${data.manufacturing_date}</div>
             `);
     })
 }
