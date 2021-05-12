@@ -7,12 +7,13 @@ function send_response($data, $code) {
         500 => "Internal Server Error"
     );
 
+    // Headers de la requête
     header("Content-Type: application/json; charset=utf8");
     header("Cache-control: no-store, no-cache, must-revalidate");
     header("Pragma: no-cache");
     header("HTTP/1.1 $code " . $messages[$code]);
 
-    // If the data isn't null, encode it to JSON and send it
+    // Si les données existent, elles sont encodées en JSON et envoyées au client
     if (isset($data))
         echo json_encode($data);
 
@@ -21,18 +22,9 @@ function send_response($data, $code) {
 
 require_once("database.php");
 
-// If the request method isn't GET, the request isn't correct
+// Si le type de requête n'est pas GET, la requête n'est pas traitable
 if ($_SERVER["REQUEST_METHOD"] != "GET")
     send_response(null, 400);
-
-try {
-    $db = new dbConnector();
-} catch (PDOException $exception) {
-    // If there was a problem accessing the database
-    // we send an error to the client
-    error_log("Request error" . $exception->getMessage());
-    send_response(null, 500);
-}
 
 $request = substr($_SERVER["PATH_INFO"], 1);
 $request = explode("/", $request);
@@ -41,27 +33,46 @@ $ressource = array_shift($request);
 $apiVersion = array_shift($request);
 $requestRessource = array_shift($request);
 
-// If the ressource is not api, the version is not v1
-// or the request ressource isn't set, send a Bad Request header
+// Si ce n'est pas l'API qui est demandée, que la version n'est pas v1
+// ou que la ressource n'est pas spécifiée, la requête n'est pas traitable
 if ($ressource != "api" || $apiVersion != "v1" || !isset($requestRessource))
     send_response(null, 400);
+
+try {
+    $db = new dbConnector();
+} catch (PDOException $exception) {
+    // S'il y a un problème a la connection à la base de données,
+    // on renvoie une erreure interne au client
+    error_log("Request error" . $exception->getMessage());
+    send_response(null, 500);
+}
 
 $data = null;
 
 switch ($requestRessource) {
-    case "employees":
-        if (isset($request[0]) && isset($request[1]) && $request[1] == "equipments")
-            $data = $db->getEmployeeEquipments($request[0]);
+    // Ressource "utilisateurs"
+    case "utilisateurs":
+        // Requête des materiels associé a un utilisateur
+        if (isset($request[0]) && isset($request[1]) && $request[1] == "materiels")
+            $data = $db->getMaterielsUtilisateur($request[0]);
+        // Requête d'informations sur un utilisateur
         else if (isset($request[0]))
-            $data = $db->getEmployee($request[0]);
+            $data = $db->getUtilisateur($request[0]);
+        // Requête de tous les utilisateurs
         else
-            $data = $db->getEmployees();
+            $data = $db->getUtilisateurs();
         break;
-    case "equipments":
-        if (isset($request[0]))
-            $data = $db->getEquipment($request[0]);
+    // Ressource "materiels"
+    case "materiels":
+        // Recherche pour savoir un un materiel existe
+        if (isset($_GET["search"]))
+            $data = $db->search($_GET["search"]);
+        // Requête d'informations sur un materiel
+        else if (isset($request[0]))
+            $data = $db->getMateriel($request[0]);
+        // Requêtes de tous les materiels
         else
-            $data = $db->getEquipments();
+            $data = $db->getMateriels();
         break;
     default:
         send_reponse(null, 400);

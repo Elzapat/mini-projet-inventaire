@@ -6,19 +6,19 @@ class dbConnector {
     private $db;
 
     public function __construct() {
-        // Connect to the database
+        // Connection à la base de données
         $this->db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8",
                 DB_USERNAME, DB_PASSWORD);
     }
 
     public function __destruct() {
-        // Disconnect from the database
+        // Deconnection de la base de données
         unset($db);
     }
 
-    // Get all of the employees
-    public function getEmployees() {
-        $request = "SELECT last_name, first_name, email FROM employee;";
+    // Envoie tout les utilisateurs
+    public function getUtilisateurs() {
+        $request = "SELECT nom, prenom, mail FROM utilisateur;";
         $statement = $this->db->prepare($request);
         $statement->execute();
 
@@ -26,20 +26,20 @@ class dbConnector {
         return $result;
     }
 
-    // Get one employee by its email address
-    public function getEmployee($email) {
-        $request = "SELECT * FROM employee WHERE email = :email;";
+    // Renvoie des informations sur un utilisateur, identifié par son adresse mail
+    public function getUtilisateur($mail) {
+        $request = "SELECT * FROM utilisateur WHERE mail = :mail;";
         $statement = $this->db->prepare($request);
-        $statement->bindParam(":email", $email, PDO::PARAM_STR, 30);
+        $statement->bindParam(":mail", $mail, PDO::PARAM_STR, 30);
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result[0];
     }
 
-    // Get all of the equipments
-    public function getEquipments() {
-        $request = "SELECT name, serial_number FROM assignment;";
+    // Renvoie tout les materiels
+    public function getMateriels() {
+        $request = "SELECT nom, num_serie FROM association;";
         $statement = $this->db->prepare($request);
         $statement->execute();
 
@@ -47,30 +47,45 @@ class dbConnector {
         return $result;
     }
 
-    // Get one equipment by its serial number
-    public function getEquipment($serialNumber) {
-        $request = "SELECT a.serial_number, a.assignment_date, e.name, e.feature, e.manufacturing_date
-                    FROM equipment e JOIN assignment a ON e.name = a.name
-                    WHERE a.serial_number = :serial_number;";
+    // Informations sur un matériel identifié par son nom 
+    public function getMateriel($nom) {
+        $request = "SELECT * FROM materiel WHERE nom = :nom";
         $statement = $this->db->prepare($request);
-        $statement->bindParam(":serial_number", $serialNumber, PDO::PARAM_STR, 50);
+        $statement->bindParam(":nom", $nom, PDO::PARAM_STR, 50);
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result[0];
     }
 
-    // Get all the equipments assigned to one employee, identified by its email
-    public function getEmployeeEquipments($email) {
-        $request = "SELECT a.serial_number, a.assignment_date, e.name, e.feature, e.manufacturing_date
-                    FROM equipment e JOIN assignment a ON e.name = a.name
-                    WHERE a.email = :email";
+    // Tout les materiels associés a un utilisateur
+    public function getMaterielsUtilisateur($mail) {
+        $request = "SELECT a.num_serie, a.date_association, e.nom, e.caracteristique, e.date_fabrication
+                    FROM materiel e JOIN association a ON e.nom = a.nom
+                    WHERE a.mail = :mail";
         $statement = $this->db->prepare($request);
-        $statement->bindParam(":email", $email, PDO::PARAM_STR, 30);
+        $statement->bindParam(":mail", $mail, PDO::PARAM_STR, 30);
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    // Permet de chercher si un enregistrement existe dans la base de donnée 
+    // en fonction d'une valeur
+    public function search($searchValue) {
+        switch ($searchValue) {
+            case "num_serie":
+                $numSerie = $_GET["num"];
+                $request = "SELECT nom FROM association WHERE num_serie = :num_serie;";
+                $statement = $this->db->prepare($request);
+                $statement->bindParam(":num_serie", $numSerie, PDO::PARAM_STR, 30);
+                $statement->execute();
+
+                return !empty($statement->fetchAll(PDO::FETCH_ASSOC));
+            default:
+                return null;
+        }
     }
 }
 
