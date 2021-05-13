@@ -31,15 +31,15 @@ $('body').on("click", ".button", (event) => {
     ;
     if (type == "email") {
         $(".overlay").css('display', 'flex');
-        popupEmployee("php/requests.php/api/v1/employees/" + value);
+        popupEmployee("api/v1/utilisateurs/" + value);
     }
     else if (type == "serial") {
         $(".overlay").css('display', 'flex');
-        popupEquipement("php/requests.php/api/v1/equipments/" + value);
+        popupEquipement("api/v1/materiels/" + value);
     }
     else if (type == "inventory") {
         $(".overlay").css('display', 'flex');
-        popupLinkedEquipement("php/requests.php/api/v1/employees/" + value + "/equipments", value);
+        popupLinkedEquipement("api/v1/utilisateurs/" + value + "/equipments", value);
     }
 });
 //possiblité de faire bouger les fenetres

@@ -49,6 +49,8 @@ class dbConnector {
 
     // Informations sur un matériel identifié par son nom 
     public function getMateriel($nom) {
+        if($nom[0] == "'")
+            $nom = substr($nom, 1, -1);
         $request = "SELECT * FROM materiel WHERE nom = :nom";
         $statement = $this->db->prepare($request);
         $statement->bindParam(":nom", $nom, PDO::PARAM_STR, 50);
