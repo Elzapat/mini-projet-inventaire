@@ -34,12 +34,12 @@ class dbConnector {
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result[0];
+        return count($result) > 0 ? $result[0] : null;
     }
 
     // Renvoie tout les materiels
     public function getMateriels() {
-        $request = "SELECT nom, num_serie FROM association;";
+        $request = "SELECT nom FROM materiel;";
         $statement = $this->db->prepare($request);
         $statement->execute();
 
@@ -49,15 +49,16 @@ class dbConnector {
 
     // Informations sur un matériel identifié par son nom 
     public function getMateriel($nom) {
-        if($nom[0] == "'")
-            $nom = substr($nom, 1, -1);
+        $nom = str_replace("'", "", $nom);
+
         $request = "SELECT * FROM materiel WHERE nom = :nom";
         $statement = $this->db->prepare($request);
         $statement->bindParam(":nom", $nom, PDO::PARAM_STR, 50);
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result[0];
+
+        return count($result) > 0 ? $result[0] : null;
     }
 
     // Tout les materiels associés a un utilisateur
