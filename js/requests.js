@@ -26,17 +26,15 @@ function employees() {
 function equipements() {
     ajaxRequest("GET", "api/v1/materiels", (data) => {
         $('#table-head').html(`<tr>
-        <th scope="col">Numéro de série</th>
         <th scope="col">Nom</th>
         <th scope="col">En savoir plus</th>
         </tr>`);
         $('#table-body').html("");
         data.forEach((element) => {
             $('#table-body').append(`<tr>
-            <td data-label="Numéro de série">${element.num_serie}</td>
             <td data-label="Nom">${element.nom}</td>
             <td data-label="En Savoir plus">
-                <button data-ref="serial:${element.num_serie}" class="button">
+                <button data-ref="serial:${element.nom}" class="button">
                     plus d'information
                 </button>
             </td>
@@ -62,12 +60,10 @@ function popupEmployee(link) {
 //Permet d'afficher un équiment dans la popup
 function popupEquipement(link) {
     ajaxRequest("GET", link, (data) => {
-        $('#popup-title').html(`${data.name}`);
-        $('#popup-content').html(`<div class="popup-element" data-label="Nom">${data.name}</div>
-            <div class="popup-element" data-label="Caracteristique">${data.feature}</div>
-            <div class="popup-element" data-label="Numéro de Série">${data.serial_number}</div>
-            <div class="popup-element" data-label="Date d'affectation">${data.assignment_date}</div>
-            <div class="popup-element" data-label="Date de fabrication">${data.manufacturing_date}</div>
+        $('#popup-title').html(`${data.nom}`);
+        $('#popup-content').html(`<div class="popup-element" data-label="Nom">${data.nom}</div>
+            <div class="popup-element" data-label="Caracteristique">${data.caracteristique}</div>
+            <div class="popup-element" data-label="Date de fabrication">${data.date_fabrication}</div>
             `);
     });
 }
@@ -79,7 +75,7 @@ function popupLinkedEquipement(link, email) {
         $('#popup-title').html(`${email}`);
         $('#popup-content').html("");
         data.forEach((element) => {
-            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.name}</div>`);
+            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.nom}</div>`);
         });
     });
 }

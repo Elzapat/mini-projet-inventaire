@@ -39,7 +39,7 @@ $('body').on("click", ".button", (event) => {
     }
     else if (type == "inventory") {
         $(".overlay").css('display', 'flex');
-        popupLinkedEquipement("api/v1/utilisateurs/" + value + "/equipments", value);
+        popupLinkedEquipement("api/v1/utilisateurs/" + value + "/materiels", value);
     }
 });
 //possiblité de faire bouger les fenetres
