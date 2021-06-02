@@ -1,6 +1,5 @@
-## Projet PHP CIR2 LORCY Benoit & VAN AMERONGEN Morgan
 
-# Étapes préliminaires
+## Étapes préliminaires
 
 * Il faut initialiser la base de donnée MySQL/MariaDB en utilisant<br>
 les deux script sql fournis (`database.sql` et `content.sql`).<br>
@@ -8,10 +7,36 @@ les deux script sql fournis (`database.sql` et `content.sql`).<br>
 et l'utilisateur, et qui va nous placer dans la base de données.<br>
 * Ensuite, il faut éxecuter le script `content.sql` qui va créer les différentes
 tables et les remplir.
-* Nous avons fourni un fichier `.htaccess` pour rendre les liens vers l'API plus logiques.<br>
-Le fichier de configuration VHost `2021-CIR2-prj-BL-MVA.conf` est aussi fourni.
+* Ci-dessous sont fournis un fichier de configuration VHost et un .htaccess.<br>
+Pour que l'URL Mapping fonctionne, il faut activer le module Rewrite.
+* 2021-CIR2-prj-BL-MVA.conf
+```
+<VirtualHost *:80>
+    ServerName 2021-CIR2-prj-BL-MVA
 
-# Utilisation
+    ErrorLog /var/log/apache2/2021-CIR2-prj-BL-MVA
+
+    DocumentRoot /var/www/html/2021-CIR2-prj-BL-MVA
+    <Directory /var/www/html/2021-CIR2-prj-BL-MVA>
+        AllowOverride All
+        DirectoryIndex index.html
+        Require all granted 
+    </Directory>
+</VirtualHost>
+```
+* .htaccess
+```
+RewriteEngine On
+Options +FollowSymLinks
+Options All -Indexes
+RewriteRule ^api/v1(.*) php/requests.php/%{REQUEST_URI} [QSA]
+<FilesMatch "(constants.php|database.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+```
+
+## Utilisation
 
 Il y a deux façons de tester notre API :
 * En passant par le front (normalement, le site est host sur `http://php.lorcy.info`).
