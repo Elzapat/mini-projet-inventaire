@@ -1,5 +1,7 @@
 <?php
 
+// Fonction permettant de renvoyer une réponse au client avec un message
+// associé à un code, pour que le client sache si l'a requête à échoué ou non.
 function send_response($data, $code) {
     $messages = array(
         200 => "OK",
@@ -26,11 +28,16 @@ require_once("database.php");
 if ($_SERVER["REQUEST_METHOD"] != "GET")
     send_response(null, 400);
 
+// On récupère le lien après le fichier PHP et on retire le premier slash
 $request = substr($_SERVER["PATH_INFO"], 1);
+// On divise la requête en plusieurs parties
 $request = explode("/", $request);
 
+// La première partie est la ressource à laquelle le client veut accéder
 $ressource = array_shift($request);
+// La deuxième partie est la version de l'API
 $apiVersion = array_shift($request);
+// La troisième partie sont les paramètres nous permettant de traiter la requête
 $requestRessource = array_shift($request);
 
 // Si ce n'est pas l'API qui est demandée, que la version n'est pas v1
