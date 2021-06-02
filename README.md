@@ -1,4 +1,9 @@
 
+<<<<<<< HEAD
+=======
+# Projet PHP CIR2 LORCY Benoit & VAN AMERONGEN Morgan
+
+>>>>>>> 2662375835389c5ae4e86f290da7e24d4774668e
 ## Étapes préliminaires
 
 * Il faut initialiser la base de donnée MySQL/MariaDB en utilisant<br>
@@ -13,6 +18,7 @@ Pour que l'URL Mapping fonctionne, il faut activer le module Rewrite.
 ```
 <VirtualHost *:80>
     ServerName 2021-CIR2-prj-BL-MVA
+<<<<<<< HEAD
 
     ErrorLog /var/log/apache2/2021-CIR2-prj-BL-MVA
 
@@ -36,6 +42,31 @@ RewriteRule ^api/v1(.*) php/requests.php/%{REQUEST_URI} [QSA]
 </FilesMatch>
 ```
 
+=======
+
+    ErrorLog /var/log/apache2/2021-CIR2-prj-BL-MVA
+
+    DocumentRoot /var/www/html/2021-CIR2-prj-BL-MVA
+    <Directory /var/www/html/2021-CIR2-prj-BL-MVA>
+        AllowOverride All
+        DirectoryIndex index.html
+        Require all granted 
+    </Directory>
+</VirtualHost>
+```
+* .htaccess
+```
+RewriteEngine On
+Options +FollowSymLinks
+Options All -Indexes
+RewriteRule ^api/v1(.*) php/requests.php/%{REQUEST_URI} [QSA]
+<FilesMatch "(constants.php|database.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+```
+
+>>>>>>> 2662375835389c5ae4e86f290da7e24d4774668e
 ## Utilisation
 
 Il y a deux façons de tester notre API :
