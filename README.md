@@ -1,6 +1,6 @@
-## Projet PHP CIR2 LORCY Benoit & VAN AMERONGEN Morgan
+# Projet PHP CIR2 LORCY Benoit & VAN AMERONGEN Morgan
 
-# Étapes préliminaires
+## Étapes préliminaires
 
 * Il faut initialiser la base de donnée MySQL/MariaDB en utilisant<br>
 les deux script sql fournis (`database.sql` et `content.sql`).<br>
@@ -11,7 +11,7 @@ tables et les remplir.
 * Nous avons fourni un fichier `.htaccess` pour rendre les liens vers l'API plus logiques.<br>
 Le fichier de configuration VHost `2021-CIR2-prj-BL-MVA.conf` est aussi fourni.
 
-# Utilisation
+## Utilisation
 
 Il y a deux façons de tester notre API :
 * En passant par le front (normalement, le site est host sur `http://php.lorcy.info`).
