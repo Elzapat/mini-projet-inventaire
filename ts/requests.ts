@@ -6,6 +6,7 @@ interface Employee {
     nom: string;
     prenom: string;
     mail: string;
+    date_embauche?: string;
 }
 
 //affiche tous les employés sur la page principale
@@ -34,24 +35,23 @@ function employees() {
 //type d'un equipement dans le tableau
 interface Equipment {
     nom: string;
-    num_serie: string;
+    caracteristique?: string;
+    date_fabrication?: string;
 }
 
 //affiche tout les equipement sur la page principale
 function equipements() {
     ajaxRequest("GET", "api/v1/materiels", (data: Equipment[]) => {
         $('#table-head').html(`<tr>
-        <th scope="col">Numéro de série</th>
         <th scope="col">Nom</th>
         <th scope="col">En savoir plus</th>
         </tr>`);
         $('#table-body').html("");
         data.forEach((element: Equipment) => {
             $('#table-body').append(`<tr>
-            <td data-label="Numéro de série">${element.num_serie}</td>
             <td data-label="Nom">${element.nom}</td>
             <td data-label="En Savoir plus">
-                <button data-ref="serial:${element.num_serie}" class="button">
+                <button data-ref="serial:${element.nom}" class="button">
                     plus d'information
                 </button>
             </td>
@@ -60,17 +60,9 @@ function equipements() {
     })
 }
 
-//type d'un employé dans la popup
-interface FullEmployee {
-    mail: string;
-    nom: string;
-    prenom: string;
-    date_embauche: string;
-}
-
 //Permet d'afficher un employé dans la popup
 function popupEmployee(link: string) {
-    ajaxRequest("GET", link, (data: FullEmployee) => {
+    ajaxRequest("GET", link, (data: Employee) => {
         $('#popup-title').html(`${data.prenom} ${data.nom}`);
         $('#popup-content').html(
             `<div class="popup-element" data-label="Nom">${data.nom}</div>
@@ -86,25 +78,14 @@ function popupEmployee(link: string) {
     })
 }
 
-//type d'un équiment dans la popup
-interface FullEquipment {
-    serial_number: string;
-    assignment_date: string;
-    name: string;
-    feature: string;
-    manufacturing_date: string;
-}
-
 //Permet d'afficher un équiment dans la popup
 function popupEquipement(link: string) {
-    ajaxRequest("GET", link, (data: FullEquipment) => {
-        $('#popup-title').html(`${data.name}`);
+    ajaxRequest("GET", link, (data: Equipment) => {
+        $('#popup-title').html(`${data.nom}`);
         $('#popup-content').html(
-            `<div class="popup-element" data-label="Nom">${data.name}</div>
-            <div class="popup-element" data-label="Caracteristique">${data.feature}</div>
-            <div class="popup-element" data-label="Numéro de Série">${data.serial_number}</div>
-            <div class="popup-element" data-label="Date d'affectation">${data.assignment_date}</div>
-            <div class="popup-element" data-label="Date de fabrication">${data.manufacturing_date}</div>
+            `<div class="popup-element" data-label="Nom">${data.nom}</div>
+            <div class="popup-element" data-label="Caracteristique">${data.caracteristique}</div>
+            <div class="popup-element" data-label="Date de fabrication">${data.date_fabrication}</div>
             `);
     })
 }
@@ -113,11 +94,11 @@ function popupEquipement(link: string) {
 function popupLinkedEquipement(link: string, email: string) {
     $("#popup-back").css('visibility', 'visible');
     $("#popup-back").data("ref", `email:${email}`);
-    ajaxRequest("GET", link, (data: FullEquipment[]) => {
+    ajaxRequest("GET", link, (data: Equipment[]) => {
         $('#popup-title').html(`${email}`);
         $('#popup-content').html("");
-        data.forEach((element: FullEquipment) => {
-            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.name}</div>`);
+        data.forEach((element: Equipment) => {
+            $('#popup-content').append(`<div class="popup-element" data-label="Nom">${element.nom}</div>`);
         });
     })
 }

@@ -39,7 +39,7 @@ $('body').on("click", ".button", (event) => {
         popupEquipement("api/v1/materiels/" + value);
     } else if (type == "inventory") {
         $(".overlay").css('display', 'flex');
-        popupLinkedEquipement("api/v1/utilisateurs/" + value + "/equipments", value);
+        popupLinkedEquipement("api/v1/utilisateurs/" + value + "/materiels", value);
     }
 })
 
