@@ -1,4 +1,6 @@
 
+# Projet PHP CIR2 LORCY Benoit & VAN AMERONGEN Morgan
+
 ## Étapes préliminaires
 
 * Il faut initialiser la base de donnée MySQL/MariaDB en utilisant<br>
