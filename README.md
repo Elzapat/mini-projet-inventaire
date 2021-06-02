@@ -31,7 +31,6 @@ Options +FollowSymLinks
 Options All -Indexes
 RewriteRule ^api/v1(.*) php/requests.php/%{REQUEST_URI} [QSA]
 <FilesMatch "(constants.php|database.php)$">
-    ## Apache 2.2
     Order allow,deny
     Deny from all
 </FilesMatch>
